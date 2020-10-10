@@ -17,6 +17,19 @@ namespace Chess.ChessPieces
         }
 
         public abstract bool IsValidMove();
+
+        public override string ToString()
+        {
+            string pieceKey = $"{pieceColor}_{pieceName}";
+
+            // padding with space
+            while (pieceKey.Length < 15)
+            {
+                pieceKey = pieceKey + " ";
+            }
+
+            return pieceKey;
+        }
     }
 
     public enum PieceName 

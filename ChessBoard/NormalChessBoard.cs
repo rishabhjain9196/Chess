@@ -24,7 +24,18 @@ namespace Chess
 
         public override void Set()
         {
-            
+           
+        }
+
+        public ChessPiece getAt(int rowNum, char colKey) 
+        {
+            int colNum = 0;
+            if (colKey >= 'A' && colKey <= 'Z')
+            {
+                colNum = colKey - 'A';
+            }
+
+            return layout[rowNum][colNum];
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Chess.Players;
+﻿using Chess.Display;
+using Chess.Players;
 using System;
 using System.Collections.Generic;
 
@@ -8,19 +9,27 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Console Chess Application!");
+            DisplayUtilities.Intro();
 
             Player player1 = new Player();
-            Console.WriteLine("Enter Player 1 Name");
-            player1.gameName = Console.ReadLine();
+            player1.getBasicInfo();
 
+            bool isFirst = player1.gameColor == GameColor.White;
             Player player2 = new Player();
-            Console.WriteLine("Enter Player 2 Name");
-            player2.gameName = Console.ReadLine();
+            player2.getBasicInfo(isFirst ? GameColor.Black : GameColor.White);
 
             List<Player> players = new List<Player>();
-            players.Add(player1);
-            players.Add(player2);
+
+            if (player1.gameColor == GameColor.White)
+            {
+                players.Add(player1);
+                players.Add(player2);
+            }
+            else 
+            {
+                players.Add(player2);
+                players.Add(player1);
+            }
 
             ChessGame game = new ChessGame(players);
             game.Start();

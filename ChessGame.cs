@@ -40,6 +40,7 @@ namespace Chess
             {
                 DisplayUtilities.PrintChessBoard(chessBoard);
                 DisplayUtilities.PromptPlayerMove(currentPlayer);
+                
 
 
                 UpdateCurrentPlayer();

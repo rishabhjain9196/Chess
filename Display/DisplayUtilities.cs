@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace Chess.Display
 {
     public static class DisplayUtilities
     {
-        public static void DashLine(int length = 100) 
+        public static void DashLine(int length = 150) 
         {
             for(int i=0; i<length; i++)
                 Console.Write("-");
@@ -45,6 +46,22 @@ namespace Chess.Display
         {
             Line();
             Console.WriteLine($"{player.gameName} turn to play - provide initial and final positions to move");
+            Line();
+        }
+
+        public static void GetPlayerName() 
+        {
+            Line();
+            Console.WriteLine("Enter Player Name..");
+            Line();
+        }
+
+        public static void GetPlayerColor() 
+        {
+            Line();
+            Console.WriteLine("Choose your colour");
+            Console.WriteLine("0. Black");
+            Console.WriteLine("1. White (First Turn)");
             Line();
         }
     }
