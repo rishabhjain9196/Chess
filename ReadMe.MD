@@ -3,8 +3,8 @@
 ### Introuction
 .NetCore 3.1 Based Chess Console Application for Low Level Design 
 
-### Screenshots
-<img src = "documentation/chess_board.png"></img>
+### Sample
+- Chess Board <img alt = "Chess Console Board" src = "https://github.com/rishabhjain9196/Chess/blob/master/Documentation/chess_board.png">
 
 ### Setup Instructions
 - Use .NetCore 3.1 and Visual Studio 2019 to compile
