@@ -49,26 +49,77 @@ namespace Chess
                     break;
                 }
                 var locations = command.Split(new char[] { ' ' });
-                this.Move(currentPlayer, new Location(locations[0]), new Location(locations[2]));
-                UpdateCurrentPlayer();
+                var  moveResult = this.Move(currentPlayer, new Location(locations[0]), new Location(locations[2]));
+                if (moveResult != MoveResult.Invalid)
+                {
+                    UpdateCurrentPlayer();
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid Move by {currentPlayer.gameName}. Please retry.");
+                }
             }
 
             Console.ReadKey();
         }
 
 
-        public bool Move(Player player, Location from, Location to)
+        public MoveResult Move(Player player, Location from, Location to)
         {
             try
             {
-                var piece = this.chessBoard.getPieceAt(from);
-                this.chessBoard.setPieceAt(piece, to);
+                var from_piece = this.chessBoard.getPieceAt(from);
+                var to_piece = this.chessBoard.getPieceAt(to);
+
+                // Validation - Player should move only his piece
+                if (player.gameColor.ToString() != from_piece.pieceColor.ToString()) 
+                {
+                    Console.WriteLine("Validation - Player should move only his piece failed");
+                    return MoveResult.Invalid;
+                }
+
+                // Validation - player can't kill self piece
+                if (from_piece.pieceColor == to_piece.pieceColor)
+                {
+                    Console.WriteLine("Validation - player can't kill self piece failed");
+                    return MoveResult.Invalid;
+                }
+
+                // Validation - From can't be Empty
+                if (from_piece.pieceName == new EmptyChessPiece().pieceName)
+                {
+                    Console.WriteLine("Validation - From can't be Empty failed");
+                    return MoveResult.Invalid;
+                }
+
+                try
+                {
+                    // Validation - Is Move Possible
+                    if (!from_piece.IsValidMove(from, to))
+                    {
+                        Console.WriteLine("Validation - Is Move Possible failed");
+                        return MoveResult.Invalid;
+                    }
+                }
+                catch (Exception) 
+                {
+                    return MoveResult.Valid;
+                }
+
+                // Kill Log
+                if (to_piece.pieceName != PieceName.Empty && to_piece.pieceColor.ToString() != currentPlayer.gameColor.ToString()) 
+                {
+                    Console.WriteLine($"{currentPlayer.gameName} killed {to_piece} with {from_piece}.");
+                    return to_piece.pieceColor == PieceColor.Black ? MoveResult.BlackKill : MoveResult.WhiteKill;
+                }
+
+                this.chessBoard.setPieceAt(from_piece, to);
                 this.chessBoard.setPieceAt(new EmptyChessPiece(), from);
-                return true;
+                return MoveResult.Valid;
             }
             catch (Exception) 
             {
-                return false;
+                return MoveResult.Invalid;
             }
         }
 
@@ -92,5 +143,15 @@ namespace Chess
         NotStarted,
         Active,
         Ended
+    }
+
+    public enum MoveResult 
+    {
+        Invalid,
+        WhiteKill,
+        BlackKill,
+        WhiteKingKilled,
+        BlackKingKilled,
+        Valid
     }
 }

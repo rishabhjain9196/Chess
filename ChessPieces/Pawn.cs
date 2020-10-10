@@ -10,7 +10,7 @@ namespace Chess.ChessPieces
 
         public override bool IsValidMove(Location from, Location to)
         {
-            bool isValid = from.colKey == to.colKey && to.rowNum - from.rowNum == 1; 
+            bool isValid = from.colKey == to.colKey && Math.Abs(to.rowNum - from.rowNum) == 1; 
             return isValid;
         }
     }
