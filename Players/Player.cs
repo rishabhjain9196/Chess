@@ -4,6 +4,14 @@
     {
         public Account account;
 
-        public string GameName;
+        public string gameName;
+
+        public GameColor gameColor;
+    }
+
+    public enum GameColor 
+    {
+        Black,
+        White
     }
 }
