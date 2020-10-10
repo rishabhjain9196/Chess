@@ -8,24 +8,9 @@ namespace Chess.ChessPieces
     {
         public Rook(PieceColor pieceColor) : base(PieceName.Rook, pieceColor) { }
 
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override bool IsValidMove()
+        public override bool IsValidMove(Location from, Location to)
         {
             throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }

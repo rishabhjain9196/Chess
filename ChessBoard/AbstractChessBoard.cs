@@ -36,8 +36,8 @@ namespace Chess.ChessBoard
 
         public virtual void PrintBoard() 
         {
-            char rowKey = '1';
-            char colKey = 'A';
+            char rowKey = 'A';
+            char colKey = '1';
             char blankKey = ' ';
 
             Console.Write(getPaddedKey(blankKey, 15) + " ");
@@ -54,15 +54,29 @@ namespace Chess.ChessBoard
             for (int i=0; i<rowSize; i++) 
             {
                 Console.Write(getPaddedKey(colKey,15) + " ");
-                colKey++;
+                
                 for (int j=0; j<colSize; j++) 
                 {
                     Console.Write(layout[i][j].ToString() +  " ");
                 }
 
+                Console.Write(getPaddedKey(colKey, 15) + " ");
+
                 Console.WriteLine();
-                Console.WriteLine();
+                colKey++;
             }
+
+            Console.WriteLine();
+
+            Console.Write(getPaddedKey(blankKey, 15) + " ");
+            rowKey = 'A';
+            for (int i = 0; i < colSize; i++)
+            {
+                Console.Write(getPaddedKey(rowKey, 15) + " ");
+                rowKey++;
+            }
+
+            Console.WriteLine();
         }
 
         private string getPaddedKey(char key, int pad) 
@@ -74,6 +88,24 @@ namespace Chess.ChessBoard
             }
 
             return paddedKey;
+        }
+
+        public virtual ChessPiece getPieceAt(Location location)
+        {
+            return this.layout[location.rowNum - 1][location.getColNum()];
+        }
+
+        public virtual bool setPieceAt(ChessPiece chessPiece, Location location)
+        {
+            try
+            {
+                this.layout[location.rowNum - 1][location.getColNum()] = chessPiece;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
     }

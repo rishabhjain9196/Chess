@@ -45,7 +45,7 @@ namespace Chess.Display
         public static void PromptPlayerMove(Player player) 
         {
             Line();
-            Console.WriteLine($"{player.gameName} turn to play - provide initial and final positions to move");
+            Console.WriteLine($"{player.gameName} turn to play. E.g D5 to E1");
             Line();
         }
 

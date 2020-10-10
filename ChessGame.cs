@@ -1,4 +1,5 @@
 ﻿using Chess.ChessBoard;
+using Chess.ChessPieces;
 using Chess.Display;
 using Chess.Players;
 using System;
@@ -40,16 +41,36 @@ namespace Chess
             {
                 DisplayUtilities.PrintChessBoard(chessBoard);
                 DisplayUtilities.PromptPlayerMove(currentPlayer);
-                
 
-
+                string command = Console.ReadLine();
+                if (command == "q") 
+                {
+                    gameState = GameState.Ended;
+                    break;
+                }
+                var locations = command.Split(new char[] { ' ' });
+                this.Move(currentPlayer, new Location(locations[0]), new Location(locations[2]));
                 UpdateCurrentPlayer();
-                gameState = GameState.Ended;
             }
 
             Console.ReadKey();
         }
 
+
+        public bool Move(Player player, Location from, Location to)
+        {
+            try
+            {
+                var piece = this.chessBoard.getPieceAt(from);
+                this.chessBoard.setPieceAt(piece, to);
+                this.chessBoard.setPieceAt(new EmptyChessPiece(), from);
+                return true;
+            }
+            catch (Exception) 
+            {
+                return false;
+            }
+        }
 
         public void UpdateCurrentPlayer()
         {

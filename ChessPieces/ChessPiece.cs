@@ -16,7 +16,7 @@ namespace Chess.ChessPieces
             this.pieceName = pieceName;
         }
 
-        public abstract bool IsValidMove();
+        public abstract bool IsValidMove(Location from, Location to);
 
         public override string ToString()
         {
@@ -25,22 +25,11 @@ namespace Chess.ChessPieces
             // padding with space
             while (pieceKey.Length < 15)
             {
-                pieceKey = pieceKey + " ";
+                pieceKey += " ";
             }
 
             return pieceKey;
         }
-    }
-
-    public enum PieceName 
-    {
-        Rook,
-        Bishop,
-        Pawn,
-        King,
-        Queen,
-        Horse,
-        Empty
     }
 
     public enum PieceColor

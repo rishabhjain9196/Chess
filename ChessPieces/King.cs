@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Chess.ChessPieces
 {
-    public class EmptyChessPiece : ChessPiece
+    public class King : ChessPiece
     {
-        public EmptyChessPiece() : base(PieceName.Empty, PieceColor.Empty) { }
+        public King(PieceColor pieceColor) : base(PieceName.King, pieceColor) { }
 
         public override bool IsValidMove(Location from, Location to)
         {
-            return false;
+            throw new NotImplementedException();
         }
     }
 }
