@@ -14,9 +14,10 @@ namespace Chess
             layout = new List<List<ChessPiece>>(rowSize);
             for (int i = 0; i < rowSize; i++)
             {
+                layout[i] = new List<ChessPiece>(colSize);
                 for (int j = 0; j < colSize; j++)
                 {
-                    layout[i].Add(new EmptyChessPiece());
+                    layout[i][j] = new EmptyChessPiece();
                 }
             }
         }

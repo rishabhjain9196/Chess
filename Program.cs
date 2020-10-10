@@ -12,11 +12,11 @@ namespace Chess
 
             Player player1 = new Player();
             Console.WriteLine("Enter Player 1 Name");
-            player1.GameName = Console.ReadLine();
+            player1.gameName = Console.ReadLine();
 
             Player player2 = new Player();
             Console.WriteLine("Enter Player 2 Name");
-            player2.GameName = Console.ReadLine();
+            player2.gameName = Console.ReadLine();
 
             List<Player> players = new List<Player>();
             players.Add(player1);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Chess.ChessBoard
 {
@@ -14,9 +15,14 @@ namespace Chess.ChessBoard
 
         public AbstractChessBoard(int rowSize, int colSize) 
         {
-            layout = new List<List<ChessPiece>>(rowSize);
+            this.rowSize = rowSize;
+            this.colSize = colSize;
+
+            // initialize board
+            layout = new List<List<ChessPiece>>();
             for (int i = 0; i < rowSize; i++) 
             {
+                layout.Add(new List<ChessPiece>());
                 for (int j = 0; j < colSize; j++)
                 {
                     layout[i].Add(new EmptyChessPiece());
@@ -34,8 +40,11 @@ namespace Chess.ChessBoard
             {
                 for (int j=0; j<colSize; j++) 
                 {
-                    Console.Write(layout[i][j].pieceColor + ":" + layout[i][j].pieceName);
+                    Console.Write(layout[i][j].pieceColor + ":" + layout[i][j].pieceName + "  ");
                 }
+
+                Console.WriteLine();
+                Console.WriteLine();
             }
         }
 

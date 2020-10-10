@@ -1,4 +1,5 @@
 ﻿using Chess.ChessBoard;
+using Chess.Display;
 using Chess.Players;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,43 @@ namespace Chess
 
             this.players = players;
             currentPlayer = players[0];
-            chessBoard = new NormalChessBoard();
+            chessBoard = new NormalChessBoard(8,8);
+            this.gameState = GameState.NotStarted;
         }
 
         public void Start() 
         {
-            Console.WriteLine("Welcome to Chess Online");
-            
+            DisplayUtilities.Intro();
+
+            this.gameState = GameState.Active;
+            while (this.gameState == GameState.Active) 
+            {
+                DisplayUtilities.PrintChessBoard(chessBoard);
+                DisplayUtilities.PromptPlayerMove(currentPlayer);
+
+
+                UpdateCurrentPlayer();
+                gameState = GameState.Ended;
+            }
+
+            Console.ReadKey();
         }
+
+
+        public void UpdateCurrentPlayer()
+        {
+            if (players[0] == this.currentPlayer)
+            {
+                this.currentPlayer = players[1];
+            }
+            else 
+            {
+                this.currentPlayer = players[0];
+            }
+        }
+
     }
+
 
     public enum GameState
     {
